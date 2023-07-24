@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+html {
+    font-size: 12px;
+    font-family: 'Press Start 2P', cursive;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1 {
+    margin: 2% auto;
+    text-align: center;
+    font-size: 4rem;
+    position: relative;
+    color: green;
+}
+#canvas {
+    width: 900px;
+    height: 450px;
+    border: 2px solid black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.scoreBoard {
+    width: 60%;
+    gap: 30rem;
+    margin-inline: auto;
+    display: flex;
+    justify-content: center;
+    align-items: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.highScore h2, .currentScore h2, .gameInstructions h2 {
+    color: red;
+    padding: 1rem 0 1rem 0;
+    text-align: center;
+    font-size: 1.75rem;
+}
+
+.highScore h2 {
+    color: rgb(198, 171, 15);
+}
+
+.gameInstructions {
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 200%);
+    position: absolute;
+}
+
+.highScore p, .currentScore p {
+    font-size: 1.75rem;
+    text-align: center;
+}
+
+.gameInstructions p {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    line-height: 2rem;;
+    font-size: 1rem;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
