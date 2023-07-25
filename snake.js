@@ -1,20 +1,21 @@
+// Canvas properties
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
-
 let box = 5, rows, columns;
 
+// Snake properties
 let snakeX = box*2, snakeY = box*2 ;
-
 let velocityX = 0, velocityY = 0;
-
 let snakeBody = [];
 
+// Food properties
 let foodX, foodY;
 
+// Game data
 let gameOver = false;
-
 let currentScore = 0;
 
+// Initialize game
 window.onload = function() {
     rows = canvas.height / box;
     columns = canvas.width / box;
@@ -25,12 +26,14 @@ window.onload = function() {
 
     placeFood();
     document.addEventListener("keydown", changeDirection); 
-    setInterval(initiate, 100);
+    setInterval(update, 100);
 }
 
-function initiate() {
+// Method for updating game data
+function update() {
+    // Reset game
     if (gameOver) {
-        nakeX = box * 2;
+        snakeX = box * 2;
         snakeY = box * 2;
         snakeBody = [];
         velocityX = 0;
@@ -40,11 +43,14 @@ function initiate() {
         gameOver = false;
     }
 
+    // Clear canvas
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
+    // Draw food
     ctx.fillStyle = "red";
     ctx.fillRect(foodX, foodY, box, box);
 
+    // Check if snake ate food
     if (snakeX == foodX && snakeY == foodY) {
         snakeBody.push([foodX, foodY])
         placeFood();
@@ -60,15 +66,19 @@ function initiate() {
         snakeBody[0] = [snakeX, snakeY];
     }
 
+    // Draw snake
     ctx.fillStyle = "lightgreen";
+    ctx.strokeStyle = "rgb(127,210,127)";
     snakeX += velocityX * box;
     snakeY += velocityY * box;
     ctx.fillRect(snakeX, snakeY, box, box);
+    ctx.strokeRect(snakeX, snakeY, box, box);
 
     for (let i = 0; i < snakeBody.length; i++) {
         ctx.fillRect(snakeBody[i][0], snakeBody[i][1], box, box);
     }
     
+    // Check if snake exceeded the wall, reposition the snake to the other side
    if (snakeX < 0) {
     snakeX = canvas.width - box;
     } else if (snakeX > canvas.width) {
@@ -79,6 +89,7 @@ function initiate() {
     snakeY = 0;
     }
 
+    // Check if snake ate itself
     for (let i = 0; i < snakeBody.length; i++) {
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
             gameOver = true;
@@ -86,12 +97,14 @@ function initiate() {
         }
     }
 
+    // Update high score
     if (currentScore > highScore) {
         highScore = currentScore;
         localStorage.setItem("highScore", highScore);
         document.getElementById("highScore").innerHTML = highScore;
     }
 
+// Change direction of snake
 }
 function changeDirection(e) {
     if (e.code == "ArrowUp" && velocityY != 1) {
@@ -112,6 +125,7 @@ function changeDirection(e) {
     }
 }
 
+// Place food randomly
 function placeFood() {
     foodX = Math.floor(Math.random() * (columns-3))*box;
     foodY = Math.floor(Math.random() * (rows-3))*box;;
