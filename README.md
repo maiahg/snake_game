@@ -1,7 +1,7 @@
 # Snake Game
 A simple Snake Game built using HTML5, CSS, and JS.
 
-You can find a live demo here: https://muchohg.github.io/snake_game/
+You can find a live demo here: [Snake Game](https://maiahg.github.io/snake_game/)
 
 ## Screenshot of the game
 ![Snake screenshot](screenshot.png)
